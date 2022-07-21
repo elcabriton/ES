@@ -11,7 +11,8 @@
 #1- gerar funciona sem o chamar tela
 from PyQt5 import uic,QtCore, QtGui, QtWidgets
 import sys
-import time
+import PyPDF2
+
 
 
 def chama_tela():
@@ -23,8 +24,16 @@ def Quit():
     exit("0")
 def lerArquivo():
     arquivo=QtWidgets.QFileDialog.getOpenFileName()[0]
-    with open(arquivo, 'r') as a:
-        print(a.read)
+    
+    texto_paginas=[]
+    with open(arquivo, 'rb') as f:
+        pdf = PyPDF2.PdfFileReader(f)
+        for i in range(pdf.numPages):
+            pagina=pdf.getPage(i)
+            texto=pagina.extractText()
+            texto_paginas.append(texto)
+    return texto_paginas  
+        
  
 #def verifica():
    # if(primeira_tela.pushButton_3.clicked.connect()==True):
@@ -44,6 +53,7 @@ segunda_tela.pushButton.clicked.connect(Quit)
 salvar=primeira_tela.pushButton_3.clicked.connect(lerArquivo)#SALVAR TEM O ARQUIVO 
 primeira_tela.pushButton_3.clicked.connect(chama_tela)
 primeira_tela.show()
+
 
 
 #verifica()
