@@ -32,7 +32,7 @@ def lerArquivo():
             pagina=pdf.getPage(i)
             texto=pagina.extractText()
             texto_paginas.append(texto)
-    return texto_paginas  
+    return texto_paginas.append(texto) 
         
  
 #def verifica():
@@ -53,6 +53,7 @@ segunda_tela.pushButton.clicked.connect(Quit)
 salvar=primeira_tela.pushButton_3.clicked.connect(lerArquivo)#SALVAR TEM O ARQUIVO 
 primeira_tela.pushButton_3.clicked.connect(chama_tela)
 primeira_tela.show()
+print (salvar)
 
 
 
